@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎃 Trick or Treat! ($TOT) 👻 - Solana Edition</title>
+    <!-- Google Fonts: Spooky (Creepster) and Clean Sans-serif (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Animate On Scroll (AOS) Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Analytics (GA4) Tracking Code - Placeholder -->
+    <!-- Replace G-XXXXXXXXXX with your actual GA4 Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    <!-- End Google Analytics -->
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="spinner"></div>
+            <p>Summoning $TOT on Solana...</p>
+        </div>
+    </div>
+
+    <!-- Global Animated Background Container & Particles -->
+    <div class="background-animation">
+        <div class="particles"></div>
+        <!-- Additional elements for ghosts/pumpkins are handled by ::before/::after in CSS -->
+        <div class="halloween-elements"></div>
+    </div>
+
+    <header class="header">
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="theme-toggle-btn">🌙</button>
+
+        <!-- Audio Volume Controls -->
+        <div class="volume-controls-group">
+            <div class="volume-control">
+                <span id="sfxVolumeIcon">🔊</span>
+                <input type="range" id="sfxVolumeSlider" min="0" max="1" step="0.1" value="0.3">
+            </div>
+            <div class="volume-control music-volume-control">
+                <span id="musicVolumeIcon">🎵</span>
+                <input type="range" id="musicVolumeSlider" min="0" max="1" step="0.1" value="0.1">
+            </div>
+        </div>
+
+        <!-- Spooky Coin Logo -->
+        <div id="tot-coin-logo" data-aos="zoom-in" data-aos-duration="1000">
+            <span class="coin-text">$TOT</span>
+        </div>
+        <h1 data-aos="fade-up" data-aos-delay="200">Trick or Treat!</h1>
+        <p data-aos="fade-up" data-aos-delay="400">Knock on Solana's door! Will you get a tasty treat or a spooky trick?</p>
+
+        <!-- Connect Wallet Button and Status -->
+        <div class="wallet-status-container" data-aos="fade-up" data-aos-delay="500">
+            <button id="connectWalletBtn" class="btn connect-wallet-btn" disabled>
+                <span>Connect Wallet</span>
+                <span class="coming-soon-badge">Coming Soon!</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Trick or Treat Game Section -->
+    <main class="game-container" data-aos="zoom-in" data-aos-delay="600" data-aos-offset="150">
+        <h2>Your Halloween Adventure!</h2>
+
+        <!-- Player Name Input -->
+        <div id="playerNameInputContainer" class="player-name-input">
+            <label for="playerName">Enter your Spooky Nickname:</label>
+            <input type="text" id="playerName" maxlength="20" placeholder="e.g., Ghostly Ghoul">
+            <button id="savePlayerNameBtn" class="btn">Save Name</button>
+        </div>
+        <p id="currentPlayerName" class="current-player-name hidden"></p>
+
+        <!-- Game Notification Area -->
+        <div id="gameNotification" class="game-notification" style="display: none;"></div>
+
+        <!-- Score Display -->
+        <div class="score-display">
+            Tricks: <span id="trickCount">0</span> | Treats: <span id="treatCount">0</span>
+        </div>
+
+        <!-- Outcome Display -->
+        <div id="outcomeDisplay" class="outcome-display">
+            Ring the doorbell to start!
+        </div>
+
+        <!-- Game Button -->
+        <div class="game-controls">
+            <button id="trickOrTreatBtn" class="btn btn-primary-action">👻 Trick or Treat! 🍬</button>
+        </div>
+
+        <!-- Reward/Trick Message -->
+        <div id="resultMessage" class="result-message hidden">
+            <p id="resultText"></p>
+            <div class="share-buttons">
+                <button id="shareXBtn" class="btn share-btn">Share on X 🐦</button>
+                <button id="shareTelegramBtn" class="btn share-btn">Share on Telegram ✈️</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Token Information Section -->
+    <section class="token-info-section" data-aos="fade-up" data-aos-offset="100">
+        <div class="token-details">
+            <h3>$TOT: The Haunted Solana Gem!</h3>
+            <p><strong>Chain:</strong> Solana (SPL)</p>
+            <p><strong>Ticker:</strong> $TOT</p>
+            <div class="contract-address-display">
+                <span class="label">Contract Address:</span>
+                <!-- Replace with your actual Solana $TOT contract address -->
+                <span id="contractAddress" class="address" title="Click to copy">Coming Soon!</span>
+                <button class="copy-btn">📋</button>
+            </div>
+            <p class="disclaimer">Always verify contract addresses before transacting. Don't get scammed by ghouls!</p>
+        </div>
+    </section>
+
+    <!-- Live Price Section -->
+    <section class="info-section price-section" data-aos="fade-up" data-aos-offset="100">
+        <div class="info-card">
+            <h2>💰 Live SOL Price</h2>
+            <div id="solPriceDisplay" class="price-display">
+                <p>Loading price data...</p>
+            </div>
+            <p class="disclaimer">Reflecting SOL for now, $TOT price soon to moon!</p>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section class="info-section" id="tokenomics-section" data-aos="fade-right" data-aos-offset="200">
+        <div class="info-card">
+            <h2>📊 $TOT Tokenomics: Spooky Distribution</h2>
+            <ul>
+                <li><strong>Total Supply:</strong> 1B $TOT (for a spooky total!)</li>
+                <li><strong>Tax Structure:</strong> 0% Buy / 0% Sell (Pure memecoin, no ghost fees!)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="info-section" id="roadmap-section" data-aos="fade-up" data-aos-offset="200">
+        <div class="info-card">
+            <h2>🗺️ $TOT Roadmap: A Journey Through the Haunted Woods!</h2>
+            <div class="roadmap-item">
+                <h3>Phase 1: The Summoning</h3>
+                <ul>
+                    <li>Website launch with interactive "Trick or Treat" game.</li>
+                    <li>Community building on Telegram & X (summoning the spirits).</li>
+                    <li>Initial liquidity provision & burning.</li>
+                    <li>Marketing howl & meme distribution.</li>
+                </ul>
+            </div>
+            <div class="roadmap-item">
+                <h3>Phase 2: The Harvest</h3>
+                <ul>
+                    <li>Game V2: More tricks, treats, and spooky mini-games.</li>
+                    <li>Community contests & candy-corn rewards.</li>
+                    <li>Partnerships with other haunted Solana projects.</li>
+                    <li>NFT collection of spooky characters (conceptual).</li>
+                </ul>
+            </div>
+            <div class="roadmap-item">
+                <h3>Phase 3: The Afterlife</h3>
+                <ul>
+                    <li>Staking in the graveyard for $TOT rewards (conceptual).</li>
+                    <li>Cross-chain haunting (multi-chain expansion).</li>
+                    <li>Potential CEX listings (reaching the mortal realm).</li>
+                    <li>Decentralized ghoul governance.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Solana Section -->
+    <section class="info-section" id="why-solana-section" data-aos="fade-left" data-aos-offset="200">
+        <div class="info-card">
+            <h2>⚡ Why Solana? The Blazingly Fast Network</h2>
+            <p>We chose Solana for $TOT for reasons as clear as a full moon night:</p>
+            <ul>
+                <li><strong>Blazingly Fast Transactions:</strong> Solana boasts incredible transaction speeds, ensuring your tricks and treats are processed almost instantly.</li>
+                <li><strong>Micro Haunting Fees:</strong> Say goodbye to exorbitant gas fees. Solana's incredibly low transaction costs mean your $TOT adventures are super affordable.</li>
+                <li><strong>Scalability & Innovation:</strong> Designed for high throughput, Solana scales to handle millions of transactions, perfect for all the trick-or-treaters joining the haunting.</li>
+                <li><strong>Vibrant Ecosystem:</strong> A rapidly expanding network of dApps, NFTs, and DeFi projects makes Solana a dynamic and innovative blockchain, perfect for haunting.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- How to Buy Section -->
+    <section class="info-section" id="how-to-buy-section" data-aos="fade-down" data-aos-offset="200">
+        <div class="info-card">
+            <h2>🚀 How to Buy $TOT 🍬</h2>
+            <p>Ready to join the Halloween fun? Follow these simple steps!</p>
+            <ol>
+                <li><strong>Setup a Solana Wallet:</strong> Download and install a Solana-compatible wallet like Phantom or Solflare browser extension. Keep your seed phrase safe from goblins!</li>
+                <li><strong>Fund Your Wallet:</strong> Send SOL (Solana) to your new wallet from an exchange (e.g., Coinbase, Binance, Kraken).</li>
+                <li><strong>Visit a DEX:</strong> Navigate to a Solana DEX like <a href="https://raydium.io/swap/" target="_blank" rel="noopener noreferrer">Raydium</a> or <a href="https://app.jup.ag/" target="_blank" rel="noopener noreferrer">Jupiter</a>.</li>
+                <li><strong>Swap SOL for $TOT:</strong> Connect your wallet, paste the official $TOT contract address into the swap interface, and swap your SOL for $TOT.</li>
+                <li><strong>HODL & Haunt!:</strong> Welcome to the Trick or Treat community!</li>
+            </ol>
+            <p class="disclaimer">Always double-check contract addresses. We are not financial advisors; DYOR (Do Your Own Rituals).</p>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="info-section" id="faq-section" data-aos="fade-up" data-aos-offset="200">
+        <div class="info-card">
+            <h2>❓ Frequently Asked Hauntings</h2>
+            <details>
+                <summary>What is $TOT?</summary>
+                <p>$TOT is a community-driven Halloween-themed memecoin on the Solana blockchain, designed for spooky fun and engagement, centered around our "Trick or Treat" game.</p>
+            </details>
+            <details>
+                <summary>How can I play the game?</summary>
+                <p>Enter your spooky nickname, save it, then click "Trick or Treat!". See if you get a treat or a trick!</p>
+            </details>
+            <details>
+                <summary>Is $TOT safe?</summary>
+                <p>$TOT is a memecoin, and like all cryptocurrencies, comes with inherent risks. Always do your own research (DYOR) before investing. Beware of phantom rugs!</p>
+            </details>
+            <details>
+                <summary>Where can I find the official contract address?</summary>
+                <p>The contract address is displayed prominently on our website, just below the header. Remember to always verify it!</p>
+            </details>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Hauntingly Powered by $TOT Coin on Solana!</p>
+    </footer>
+
+    <!-- Sound Effects -->
+    <!-- Sound sources are good, ensure they exist or replace with your own paths -->
+    <audio id="bellSound" src="https://www.soundjay.com/misc/sounds/doorbell-1.mp3" preload="auto"></audio>
+    <audio id="treatSound" src="https://www.soundjay.com/misc/sounds/success-sound-effect.mp3" preload="auto"></audio>
+    <audio id="trickSound" src="https://www.soundjay.com/misc/sounds/giggle-1.3mscary.mp3" preload="auto"></audio>
+    <audio id="clickSound" src="https://www.soundjay.com/buttons/beep-07.mp3" preload="auto"></audio>
+    <audio id="toggleSound" src="https://www.soundjay.com/buttons/button-1.mp3" preload="auto"></audio>
+
+    <!-- NEW: YouTube Background Player Container (Invisible) -->
+    <!-- The YouTube IFrame API will embed the actual player here -->
+    <div id="youtubeBackgroundPlayer" style="position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; pointer-events: none;"></div>
+
+    <!-- Animate On Scroll (AOS) Library JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
